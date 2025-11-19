@@ -1,0 +1,2821 @@
+{
+	"info": {
+		"_postman_id": "aad62048-16de-4fac-ad77-0a773b59cda7",
+		"name": "Mommy HAI",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27238487",
+		"_collection_link": "https://wsd-dev.postman.co/workspace/FlutterDev.io~cabac013-b4ed-4870-a075-60a7133ede7d/collection/27238487-aad62048-16de-4fac-ad77-0a773b59cda7?action=share&source=collection_link&creator=27238487"
+	},
+	"item": [
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "LOGIN",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.collectionVariables.set(\"terminal.token\", \"eyJhbGciOiJIUzI1NiIsImtpZCI6IjEyaEdTRW9QNkdlbHVxS1ciLCJ0eXAiOiJKV1QifQ.eyJhdWQiOiJhdXRoZW50aWNhdGVkIiwiZXhwIjoxNzEwMDU0NDkwLCJpYXQiOjE3MTAwNTA4OTAsImlzcyI6Imh0dHBzOi8vanR4ZWFheG94emdsd3J0aHJkaWwuc3VwYWJhc2UuY28vYXV0aC92MSIsInN1YiI6IjkyYzA2M2E1LTQ0NDMtNGRmOS1hY2RmLTljMzFjOTZjNGE5NSIsImVtYWlsIjoiaXAwMDAwMDFAcG9zLmlwc3lzLmlvIiwicGhvbmUiOiIiLCJhcHBfbWV0YWRhdGEiOnsicHJvdmlkZXIiOiJlbWFpbCIsInByb3ZpZGVycyI6WyJlbWFpbCJdfSwidXNlcl9tZXRhZGF0YSI6e30sInJvbGUiOiJhdXRoZW50aWNhdGVkIiwiYWFsIjoiYWFsMSIsImFtciI6W3sibWV0aG9kIjoicGFzc3dvcmQiLCJ0aW1lc3RhbXAiOjE3MTAwNTA4OTB9XSwic2Vzc2lvbl9pZCI6IjU0MGI4OTQ2LWRjNmItNGNlYS1iMWI0LTU4ODU3ZmQ2NTljMyJ9.LXgYHqiZA7mnOLUIrepsIEhggK9XI0wO0qU6Dx0e8fo\");"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.environment.set(\"token\", pm.response.json().access_token);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "apikey",
+								"value": "{{apikey}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \"email\": \"{{user}}\", \"password\": \"{{pass}}\"}"
+						},
+						"url": {
+							"raw": "{{url}}/auth/v1/token?grant_type=password",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"auth",
+								"v1",
+								"token"
+							],
+							"query": [
+								{
+									"key": "grant_type",
+									"value": "password"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Refresh token",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "apikey",
+								"value": "{{apikey}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \"email\": \"{{user}}\", \"password\": \"{{pass}}\"}"
+						},
+						"url": {
+							"raw": "{{url}}/auth/v1/token?grant_type=password",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"auth",
+								"v1",
+								"token"
+							],
+							"query": [
+								{
+									"key": "grant_type",
+									"value": "password"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Check permission",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "apikey",
+								"value": "{{apikey}}"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{terminal.token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \"action_required\": \"r\", \"table_name\": \"menus\" }"
+						},
+						"url": {
+							"raw": "{{url}}/rest/v1/rpc/check_user_permission_with_claims",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"rest",
+								"v1",
+								"rpc",
+								"check_user_permission_with_claims"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Blank",
+			"item": [
+				{
+					"name": "API",
+					"item": [
+						{
+							"name": "Get All",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "apikey",
+										"value": "{{apikey}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{apikey}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "x-client-type",
+										"value": "api",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"id\": \"1\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/functions/v1/blank",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"functions",
+										"v1",
+										"blank"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get by ID",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "apikey",
+										"value": "{{apikey}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{apikey}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": " application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": " application/json",
+										"type": "text"
+									},
+									{
+										"key": "x-client-type",
+										"value": " api",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/functions/v1/blank/1",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"functions",
+										"v1",
+										"blank",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "apikey",
+										"value": "{{apikey}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{apikey}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": " application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": " application/json",
+										"type": "text"
+									},
+									{
+										"key": "x-client-type",
+										"value": " api",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"requiredField\" : {\n        \"field\": \"value\"\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/functions/v1/blank",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"functions",
+										"v1",
+										"blank"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "apikey",
+										"value": "{{apikey}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{apikey}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": " application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": " application/json",
+										"type": "text"
+									},
+									{
+										"key": "x-client-type",
+										"value": " api",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"test\": \"true\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/functions/v1/blank/1",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"functions",
+										"v1",
+										"blank",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "apikey",
+										"value": "{{apikey}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{apikey}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": " application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": " application/json",
+										"type": "text"
+									},
+									{
+										"key": "x-client-type",
+										"value": " api",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/functions/v1/blank/1",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"functions",
+										"v1",
+										"blank",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get function status",
+							"request": {
+								"method": "OPTIONS",
+								"header": [
+									{
+										"key": "apikey",
+										"value": "{{apikey}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{apikey}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": " application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": " application/json",
+										"type": "text"
+									},
+									{
+										"key": "x-client-type",
+										"value": " api",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/functions/v1/blank",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"functions",
+										"v1",
+										"blank"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Method not allowed",
+							"request": {
+								"method": "HEAD",
+								"header": [
+									{
+										"key": "apikey",
+										"value": "{{apikey}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{apikey}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": " application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": " application/json",
+										"type": "text"
+									},
+									{
+										"key": "x-client-type",
+										"value": " api",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/functions/v1/blank",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"functions",
+										"v1",
+										"blank"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "WEB",
+					"item": [
+						{
+							"name": "Get All",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": " application/x-www-form-urlencoded",
+										"type": "text"
+									},
+									{
+										"key": "apikey",
+										"value": "{{apikey}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{apikey}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/functions/v1/blank",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"functions",
+										"v1",
+										"blank"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get by ID",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": " application/x-www-form-urlencoded",
+										"type": "text"
+									},
+									{
+										"key": "apikey",
+										"value": "{{apikey}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{apikey}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/functions/v1/blank/1",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"functions",
+										"v1",
+										"blank",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": " application/x-www-form-urlencoded",
+										"type": "text"
+									},
+									{
+										"key": "apikey",
+										"value": "{{apikey}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{apikey}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"requiredField\" : {\n        \"field\": \"value\"\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/functions/v1/blank",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"functions",
+										"v1",
+										"blank"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": " application/x-www-form-urlencoded",
+										"type": "text"
+									},
+									{
+										"key": "apikey",
+										"value": "{{apikey}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{apikey}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"test\": \"true\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/functions/v1/blank/1",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"functions",
+										"v1",
+										"blank",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": " application/x-www-form-urlencoded",
+										"type": "text"
+									},
+									{
+										"key": "apikey",
+										"value": "{{apikey}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{apikey}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/functions/v1/blank/1",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"functions",
+										"v1",
+										"blank",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get function status",
+							"request": {
+								"method": "OPTIONS",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": " application/x-www-form-urlencoded",
+										"type": "text"
+									},
+									{
+										"key": "apikey",
+										"value": "{{apikey}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{apikey}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/functions/v1/blank",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"functions",
+										"v1",
+										"blank"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Method not allowed",
+							"request": {
+								"method": "HEAD",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": " application/x-www-form-urlencoded",
+										"type": "text"
+									},
+									{
+										"key": "apikey",
+										"value": "{{apikey}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{apikey}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/functions/v1/blank",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"functions",
+										"v1",
+										"blank"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Contacts",
+			"item": [
+				{
+					"name": "API",
+					"item": [
+						{
+							"name": "Get All",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.environment.set(\"contact_uuid\", pm.response.json().data[0].id);"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "apikey",
+										"value": "{{apikey}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "x-client-type",
+										"value": "api",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"id\": \"1\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/functions/v1/contacts",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"functions",
+										"v1",
+										"contacts"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get by ID",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "apikey",
+										"value": "{{apikey}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": " application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": " application/json",
+										"type": "text"
+									},
+									{
+										"key": "x-client-type",
+										"value": " api",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/functions/v1/contacts/{{contact_uuid}}",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"functions",
+										"v1",
+										"contacts",
+										"{{contact_uuid}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "apikey",
+										"value": "{{apikey}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": " application/jso",
+										"type": "text"
+									},
+									{
+										"key": "x-client-type",
+										"value": " api",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"first_name\": \"John\",\n  \"last_name\": \"Doe\",\n  \"phone_no\": \"+1234567890\",\n  \"email\": \"john.doe@example.com\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/functions/v1/contacts",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"functions",
+										"v1",
+										"contacts"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "apikey",
+										"value": "{{apikey}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": " application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": " application/json",
+										"type": "text"
+									},
+									{
+										"key": "x-client-type",
+										"value": " api",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"first_name\": \"John\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/functions/v1/contacts/{{contact_uuid}}",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"functions",
+										"v1",
+										"contacts",
+										"{{contact_uuid}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "apikey",
+										"value": "{{apikey}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": " application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": " application/json",
+										"type": "text"
+									},
+									{
+										"key": "x-client-type",
+										"value": " api",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/functions/v1/contacts/{{contact_uuid}}",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"functions",
+										"v1",
+										"contacts",
+										"{{contact_uuid}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get function status",
+							"request": {
+								"method": "OPTIONS",
+								"header": [
+									{
+										"key": "apikey",
+										"value": "{{apikey}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": " application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": " application/json",
+										"type": "text"
+									},
+									{
+										"key": "x-client-type",
+										"value": " api",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/functions/v1/contacts",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"functions",
+										"v1",
+										"contacts"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Method not allowed",
+							"request": {
+								"method": "HEAD",
+								"header": [
+									{
+										"key": "apikey",
+										"value": "{{apikey}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": " application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": " application/json",
+										"type": "text"
+									},
+									{
+										"key": "x-client-type",
+										"value": " api",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/functions/v1/contacts",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"functions",
+										"v1",
+										"contacts"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Partners",
+			"item": [
+				{
+					"name": "API",
+					"item": [
+						{
+							"name": "Get All",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.environment.set(\"partner_uuid\", pm.response.json().data[0].id);"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "apikey",
+										"value": "{{apikey}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "x-client-type",
+										"value": "api",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/functions/v1/partners",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"functions",
+										"v1",
+										"partners"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get by ID",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "apikey",
+										"value": "{{apikey}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": " application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": " application/json",
+										"type": "text"
+									},
+									{
+										"key": "x-client-type",
+										"value": " api",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/functions/v1/partners/{{partner_uuid}}",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"functions",
+										"v1",
+										"partners",
+										"{{partner_uuid}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "apikey",
+										"value": "{{apikey}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": " application/jso",
+										"type": "text"
+									},
+									{
+										"key": "x-client-type",
+										"value": " api",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"company_name\": \"Advanced Manufacturing Corp\",\n  \"tax_id\": \"987654321\",\n  \"registration_number\": \"REG-2024-001\",\n  \"address\": \"123 Business Street, Suite 100, City, State 12345\",\n  \"bank_account\": \"1234567890123456\",\n  \"bank_name\": \"First National Bank\",\n  \"administrator_contact_id\": \"{{contact_uuid}}\",\n  \"is_active\": true,\n  \"business_email\": \"info@advancedmfg.com\",\n  \"orders_email\": \"orders@advancedmfg.com\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/functions/v1/partners",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"functions",
+										"v1",
+										"partners"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "apikey",
+										"value": "{{apikey}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": " application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": " application/json",
+										"type": "text"
+									},
+									{
+										"key": "x-client-type",
+										"value": " api",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"first_name\": \"John\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/functions/v1/partners/{{partner_uuid}}",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"functions",
+										"v1",
+										"partners",
+										"{{partner_uuid}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "apikey",
+										"value": "{{apikey}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": " application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": " application/json",
+										"type": "text"
+									},
+									{
+										"key": "x-client-type",
+										"value": " api",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/functions/v1/partners/{{partner_uuid}}",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"functions",
+										"v1",
+										"partners",
+										"{{partner_uuid}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get function status",
+							"request": {
+								"method": "OPTIONS",
+								"header": [
+									{
+										"key": "apikey",
+										"value": "{{apikey}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": " application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": " application/json",
+										"type": "text"
+									},
+									{
+										"key": "x-client-type",
+										"value": " api",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/functions/v1/contacts",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"functions",
+										"v1",
+										"contacts"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Method not allowed",
+							"request": {
+								"method": "HEAD",
+								"header": [
+									{
+										"key": "apikey",
+										"value": "{{apikey}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": " application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": " application/json",
+										"type": "text"
+									},
+									{
+										"key": "x-client-type",
+										"value": " api",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/functions/v1/contacts",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"functions",
+										"v1",
+										"contacts"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "API",
+					"item": [
+						{
+							"name": "Get All",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.environment.set(\"user_uuid\", pm.response.json().data[0].id);"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "apikey",
+										"value": "{{apikey}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "x-client-type",
+										"value": "api",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/functions/v1/users",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"functions",
+										"v1",
+										"users"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get by ID",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "apikey",
+										"value": "{{apikey}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": " application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": " application/json",
+										"type": "text"
+									},
+									{
+										"key": "x-client-type",
+										"value": " api",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/functions/v1/users/{{user_uuid}}",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"functions",
+										"v1",
+										"users",
+										"{{user_uuid}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "apikey",
+										"value": "{{apikey}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": " application/jso",
+										"type": "text"
+									},
+									{
+										"key": "x-client-type",
+										"value": " api",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"id\": \"uuid\",\n  \"email\": \"user@example1.com\",\n  \"first_name\": \"Alex\",\n  \"last_name\": \"Bordei\",\n  \"userrole\": \"admin\",\n  \"email_confirmed_at\": \"2024-01-15T10:30:00Z\",\n  \"phone\": \"+12345678920\",\n  \"phone_confirmed_at\": \"2024-01-15T10:30:00Z\",\n  \"created_at\": \"2024-01-15T10:00:00Z\",\n  \"updated_at\": \"2024-01-15T10:30:00Z\",\n  \"last_sign_in_at\": \"2024-01-15T12:00:00Z\",\n  \"banned_until\": null\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/functions/v1/users",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"functions",
+										"v1",
+										"users"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "apikey",
+										"value": "{{apikey}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": " application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": " application/json",
+										"type": "text"
+									},
+									{
+										"key": "x-client-type",
+										"value": " api",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"email\": \"alex.bordei@whiz.ro\",\n  \"phone\": \"+12345678920\",\n  \"raw_app_meta_data\": {\n    \"first_name\": \"Alex\",\n    \"last_name\": \"Bordei\",\n    \"userrole\": \"admin\"\n  },\n  \"banned_until\": null\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/functions/v1/users/{{user_uuid}}",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"functions",
+										"v1",
+										"users",
+										"{{user_uuid}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Reset password",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "apikey",
+										"value": "{{apikey}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": " application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": " application/json",
+										"type": "text"
+									},
+									{
+										"key": "x-client-type",
+										"value": " api",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"password\": \"newPassword123\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/functions/v1/users/{{user_uuid}}",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"functions",
+										"v1",
+										"users",
+										"{{user_uuid}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Set userrole",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "apikey",
+										"value": "{{apikey}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": " application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": " application/json",
+										"type": "text"
+									},
+									{
+										"key": "x-client-type",
+										"value": " api",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"raw_app_meta_data\": {\n    \"userrole\": \"admin\",\n    \"first_name\": \"John\",\n    \"last_name\": \"Doe\"\n  }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/functions/v1/users/{{user_uuid}}",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"functions",
+										"v1",
+										"users",
+										"{{user_uuid}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "apikey",
+										"value": "{{apikey}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": " application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": " application/json",
+										"type": "text"
+									},
+									{
+										"key": "x-client-type",
+										"value": " api",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/functions/v1/users/{{user_uuid}}",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"functions",
+										"v1",
+										"users",
+										"{{user_uuid}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get function status",
+							"request": {
+								"method": "OPTIONS",
+								"header": [
+									{
+										"key": "apikey",
+										"value": "{{apikey}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": " application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": " application/json",
+										"type": "text"
+									},
+									{
+										"key": "x-client-type",
+										"value": " api",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/functions/v1/users",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"functions",
+										"v1",
+										"users"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Method not allowed",
+							"request": {
+								"method": "HEAD",
+								"header": [
+									{
+										"key": "apikey",
+										"value": "{{apikey}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": " application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": " application/json",
+										"type": "text"
+									},
+									{
+										"key": "x-client-type",
+										"value": " api",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/functions/v1/users",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"functions",
+										"v1",
+										"users"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Notifications",
+			"item": [
+				{
+					"name": "API",
+					"item": [
+						{
+							"name": "Get All",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.environment.set(\"notification_uuid\", pm.response.json().data[0].id);"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "apikey",
+										"value": "{{apikey}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "x-client-type",
+										"value": "api",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/functions/v1/notifications",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"functions",
+										"v1",
+										"notifications"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get by ID",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "apikey",
+										"value": "{{apikey}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": " application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": " application/json",
+										"type": "text"
+									},
+									{
+										"key": "x-client-type",
+										"value": " api",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/functions/v1/notifications/{{notification_uuid}}",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"functions",
+										"v1",
+										"notifications",
+										"{{notification_uuid}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "apikey",
+										"value": "{{apikey}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": " application/jso",
+										"type": "text"
+									},
+									{
+										"key": "x-client-type",
+										"value": " api",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"title\": \"System Maintenance Notice\",\n  \"body\": \"The system will be under maintenance from 2 AM to 4 AM UTC. Please save your work before this time.\",\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/functions/v1/notifications",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"functions",
+										"v1",
+										"notifications"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "apikey",
+										"value": "{{apikey}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": " application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": " application/json",
+										"type": "text"
+									},
+									{
+										"key": "x-client-type",
+										"value": " api",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"title\": \"System Maintenance Notice TEST\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/functions/v1/notifications/{{notification_uuid}}",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"functions",
+										"v1",
+										"notifications",
+										"{{notification_uuid}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "apikey",
+										"value": "{{apikey}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": " application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": " application/json",
+										"type": "text"
+									},
+									{
+										"key": "x-client-type",
+										"value": " api",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/functions/v1/notifications/{{notification_uuid}}",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"functions",
+										"v1",
+										"notifications",
+										"{{notification_uuid}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get function status",
+							"request": {
+								"method": "OPTIONS",
+								"header": [
+									{
+										"key": "apikey",
+										"value": "{{apikey}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": " application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": " application/json",
+										"type": "text"
+									},
+									{
+										"key": "x-client-type",
+										"value": " api",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/functions/v1/notifications",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"functions",
+										"v1",
+										"notifications"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Method not allowed",
+							"request": {
+								"method": "HEAD",
+								"header": [
+									{
+										"key": "apikey",
+										"value": "{{apikey}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": " application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": " application/json",
+										"type": "text"
+									},
+									{
+										"key": "x-client-type",
+										"value": " api",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/functions/v1/notifications",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"functions",
+										"v1",
+										"notifications"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "User Notifications",
+			"item": [
+				{
+					"name": "API",
+					"item": [
+						{
+							"name": "Get All",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.environment.set(\"user_notification_uuid\", pm.response.json().data[0].id);"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "apikey",
+										"value": "{{apikey}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "x-client-type",
+										"value": "api",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/functions/v1/user_notifications",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"functions",
+										"v1",
+										"user_notifications"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get by ID",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "apikey",
+										"value": "{{apikey}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": " application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": " application/json",
+										"type": "text"
+									},
+									{
+										"key": "x-client-type",
+										"value": " api",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/functions/v1/user_notifications/{{user_notification_uuid}}",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"functions",
+										"v1",
+										"user_notifications",
+										"{{user_notification_uuid}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "apikey",
+										"value": "{{apikey}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "x-client-type",
+										"value": "api",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"title\": \"Welcome to the app!\",\n  \"body\": \"Thanks for joining us. Here's how to get started...\",\n  \"is_global\": false,\n  \"user_id\": \"37899597-8b12-447e-9857-debbf18cd38f\",\n  \"is_read\": false\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/functions/v1/user_notifications",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"functions",
+										"v1",
+										"user_notifications"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "apikey",
+										"value": "{{apikey}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": " application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": " application/json",
+										"type": "text"
+									},
+									{
+										"key": "x-client-type",
+										"value": " api",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"title\": \"System Maintenance Notice TEST\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/functions/v1/user_notifications/{{user_notification_uuid}}",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"functions",
+										"v1",
+										"user_notifications",
+										"{{user_notification_uuid}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "apikey",
+										"value": "{{apikey}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": " application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": " application/json",
+										"type": "text"
+									},
+									{
+										"key": "x-client-type",
+										"value": " api",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/functions/v1/user_notifications/{{user_notification_uuid}}",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"functions",
+										"v1",
+										"user_notifications",
+										"{{user_notification_uuid}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get function status",
+							"request": {
+								"method": "OPTIONS",
+								"header": [
+									{
+										"key": "apikey",
+										"value": "{{apikey}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": " application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": " application/json",
+										"type": "text"
+									},
+									{
+										"key": "x-client-type",
+										"value": " api",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/functions/v1/user_notifications",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"functions",
+										"v1",
+										"user_notifications"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Method not allowed",
+							"request": {
+								"method": "HEAD",
+								"header": [
+									{
+										"key": "apikey",
+										"value": "{{apikey}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": " application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": " application/json",
+										"type": "text"
+									},
+									{
+										"key": "x-client-type",
+										"value": " api",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/functions/v1/user_notifications",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"functions",
+										"v1",
+										"user_notifications"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "terminal.token",
+			"value": ""
+		}
+	]
+}

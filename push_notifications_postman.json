@@ -1,0 +1,473 @@
+{
+  "info": {
+    "_postman_id": "push-notifications-simple-uuid",
+    "name": "Push Notifications",
+    "description": "Firebase Cloud Messaging push notifications using Google Auth Library",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Service Info",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "apikey",
+            "value": "{{apikey}}",
+            "type": "text"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}",
+            "type": "text"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "x-client-type",
+            "value": "api",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{url}}/functions/v1/push_notifications",
+          "host": [
+            "{{url}}"
+          ],
+          "path": [
+            "functions",
+            "v1",
+            "push_notifications"
+          ]
+        },
+        "description": "Get push notifications service information"
+      },
+      "response": []
+    },
+    {
+      "name": "Send Token Notification",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "apikey",
+            "value": "{{apikey}}",
+            "type": "text"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}",
+            "type": "text"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "x-client-type",
+            "value": "api",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"type\": \"token\",\n  \"target\": \"YOUR_FCM_TOKEN_HERE\",\n  \"title\": \"Test Notification\",\n  \"body\": \"This is a test message sent to your device\",\n  \"priority\": \"high\",\n  \"data\": {\n    \"action\": \"open_app\",\n    \"screen\": \"home\"\n  }\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{url}}/functions/v1/push_notifications",
+          "host": [
+            "{{url}}"
+          ],
+          "path": [
+            "functions",
+            "v1",
+            "push_notifications"
+          ]
+        },
+        "description": "Send a push notification to a specific FCM token"
+      },
+      "response": []
+    },
+    {
+      "name": "Send Topic Notification",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "apikey",
+            "value": "{{apikey}}",
+            "type": "text"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}",
+            "type": "text"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "x-client-type",
+            "value": "api",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"type\": \"topic\",\n  \"target\": \"news_updates\",\n  \"title\": \"Breaking News\",\n  \"body\": \"Important news update for all subscribers\",\n  \"priority\": \"normal\",\n  \"data\": {\n    \"category\": \"news\",\n    \"article_id\": \"12345\"\n  }\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{url}}/functions/v1/push_notifications",
+          "host": [
+            "{{url}}"
+          ],
+          "path": [
+            "functions",
+            "v1",
+            "push_notifications"
+          ]
+        },
+        "description": "Send a push notification to all devices subscribed to a topic"
+      },
+      "response": []
+    },
+    {
+      "name": "Send All Users Notification",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "apikey",
+            "value": "{{apikey}}",
+            "type": "text"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}",
+            "type": "text"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "x-client-type",
+            "value": "api",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"type\": \"all_users\",\n  \"title\": \"System Announcement\",\n  \"body\": \"Important update for all users\",\n  \"priority\": \"high\",\n  \"data\": {\n    \"type\": \"system_update\",\n    \"version\": \"1.2.0\"\n  }\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{url}}/functions/v1/push_notifications",
+          "host": [
+            "{{url}}"
+          ],
+          "path": [
+            "functions",
+            "v1",
+            "push_notifications"
+          ]
+        },
+        "description": "Send a push notification to all registered users"
+      },
+      "response": []
+    },
+    {
+      "name": "Shop Navigation Example",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "apikey",
+            "value": "{{apikey}}",
+            "type": "text"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}",
+            "type": "text"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "x-client-type",
+            "value": "api",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"type\": \"all_users\",\n  \"title\": \"Visit Our Shop 🛍️\",\n  \"body\": \"New arrivals are here! Tap to browse our latest collection.\",\n  \"priority\": \"normal\",\n  \"data\": {\n    \"route\": \"/shop\",\n    \"action\": \"navigate\",\n    \"campaign\": \"new_arrivals\"\n  }\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{url}}/functions/v1/push_notifications",
+          "host": [
+            "{{url}}"
+          ],
+          "path": [
+            "functions",
+            "v1",
+            "push_notifications"
+          ]
+        },
+        "description": "Example notification with route navigation data for shop"
+      },
+      "response": []
+    },
+    {
+      "name": "Minimal Notification",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "apikey",
+            "value": "{{apikey}}",
+            "type": "text"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}",
+            "type": "text"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "x-client-type",
+            "value": "api",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"type\": \"token\",\n  \"target\": \"YOUR_FCM_TOKEN_HERE\",\n  \"title\": \"Simple Message\",\n  \"body\": \"This is a minimal notification with required fields only\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{url}}/functions/v1/push_notifications",
+          "host": [
+            "{{url}}"
+          ],
+          "path": [
+            "functions",
+            "v1",
+            "push_notifications"
+          ]
+        },
+        "description": "Minimal notification with only required fields"
+      },
+      "response": []
+    },
+    {
+      "name": "Web Interface",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "apikey",
+            "value": "{{apikey}}",
+            "type": "text"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}",
+            "type": "text"
+          },
+          {
+            "key": "Accept",
+            "value": "text/html",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{url}}/functions/v1/push_notifications",
+          "host": [
+            "{{url}}"
+          ],
+          "path": [
+            "functions",
+            "v1",
+            "push_notifications"
+          ]
+        },
+        "description": "Access the web interface for push notifications"
+      },
+      "response": []
+    },
+    {
+      "name": "PUT Request (Not Supported)",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "apikey",
+            "value": "{{apikey}}",
+            "type": "text"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}",
+            "type": "text"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "x-client-type",
+            "value": "api",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{url}}/functions/v1/push_notifications/some-id",
+          "host": [
+            "{{url}}"
+          ],
+          "path": [
+            "functions",
+            "v1",
+            "push_notifications",
+            "some-id"
+          ]
+        },
+        "description": "Test PUT request - should return 405 Method Not Supported"
+      },
+      "response": []
+    },
+    {
+      "name": "DELETE Request (Not Supported)",
+      "request": {
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "apikey",
+            "value": "{{apikey}}",
+            "type": "text"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}",
+            "type": "text"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "x-client-type",
+            "value": "api",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{url}}/functions/v1/push_notifications/some-id",
+          "host": [
+            "{{url}}"
+          ],
+          "path": [
+            "functions",
+            "v1",
+            "push_notifications",
+            "some-id"
+          ]
+        },
+        "description": "Test DELETE request - should return 405 Method Not Supported"
+      },
+      "response": []
+    }
+  ],
+  "variable": [
+    {
+      "key": "fcm_token",
+      "value": "",
+      "type": "string",
+      "description": "FCM registration token for testing"
+    }
+  ]
+} 

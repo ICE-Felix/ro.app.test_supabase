@@ -1,0 +1,833 @@
+{
+  "info": {
+    "_postman_id": "news-collection-uuid",
+    "name": "News",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "API",
+      "item": [
+        {
+          "name": "Get All",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "apikey",
+                "value": "{{apikey}}",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "x-client-type",
+                "value": "api",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/functions/v1/news",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "functions",
+                "v1",
+                "news"
+              ]
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.environment.set(\"news_uuid\", pm.response.json().data[0].id);"
+                ],
+                "type": "text/javascript",
+                "packages": {}
+              }
+            }
+          ]
+        },
+        {
+          "name": "Get by Category ID",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "apikey",
+                "value": "{{apikey}}",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "x-client-type",
+                "value": "api",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/functions/v1/news?category_id={{news_categories_uuid}}",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "functions",
+                "v1",
+                "news"
+              ],
+              "query": [
+                {
+                  "key": "category_id",
+                  "value": "{{news_categories_uuid}}"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get with Pagination",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "apikey",
+                "value": "{{apikey}}",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "x-client-type",
+                "value": "api",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/functions/v1/news?limit=10&page=1",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "functions",
+                "v1",
+                "news"
+              ],
+              "query": [
+                {
+                  "key": "limit",
+                  "value": "10"
+                },
+                {
+                  "key": "page",
+                  "value": "1"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get with Search",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "apikey",
+                "value": "{{apikey}}",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "x-client-type",
+                "value": "api",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/functions/v1/news?search=technology",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "functions",
+                "v1",
+                "news"
+              ],
+              "query": [
+                {
+                  "key": "search",
+                  "value": "technology"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get with Combined Filters",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "apikey",
+                "value": "{{apikey}}",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "x-client-type",
+                "value": "api",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/functions/v1/news?category_id={{news_categories_uuid}}&search=innovation&limit=5&page=1",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "functions",
+                "v1",
+                "news"
+              ],
+              "query": [
+                {
+                  "key": "category_id",
+                  "value": "{{news_categories_uuid}}"
+                },
+                {
+                  "key": "search",
+                  "value": "innovation"
+                },
+                {
+                  "key": "limit",
+                  "value": "5"
+                },
+                {
+                  "key": "page",
+                  "value": "1"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get with Offset Pagination",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "apikey",
+                "value": "{{apikey}}",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "x-client-type",
+                "value": "api",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/functions/v1/news?limit=15&offset=30",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "functions",
+                "v1",
+                "news"
+              ],
+              "query": [
+                {
+                  "key": "limit",
+                  "value": "15"
+                },
+                {
+                  "key": "offset",
+                  "value": "30"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get by ID",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "apikey",
+                "value": "{{apikey}}",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": " application/json",
+                "type": "text"
+              },
+              {
+                "key": "Accept",
+                "value": " application/json",
+                "type": "text"
+              },
+              {
+                "key": "x-client-type",
+                "value": " api",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{url}}/functions/v1/news/{{news_uuid}}",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "functions",
+                "v1",
+                "news",
+                "{{news_uuid}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "apikey",
+                "value": "{{apikey}}",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "x-client-type",
+                "value": "api",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Breaking News: New Technology Breakthrough\",\n  \"news_categories_id\": \"{{news_categories_uuid}}\",\n  \"partner_id\": \"{{partner_uuid}}\",\n  \"keywords\": \"technology, innovation, breakthrough, science\",\n  \"body\": \"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.\",\n  \"likes\": 0,\n  \"read_count\": 0,\n  \"locale_id\": \"{{locale_uuid}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/functions/v1/news",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "functions",
+                "v1",
+                "news"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create with Base64 Image",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "apikey",
+                "value": "{{apikey}}",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "x-client-type",
+                "value": "api",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Breaking News with Image: AI Revolution\",\n  \"news_categories_id\": \"{{news_categories_uuid}}\",\n  \"partner_id\": \"{{partner_uuid}}\",\n  \"keywords\": \"AI, technology, revolution, artificial intelligence\",\n  \"body\": \"The AI revolution is here! This groundbreaking news article includes an featured image to showcase the technology.\",\n  \"likes\": 0,\n  \"read_count\": 0,\n  \"locale_id\": \"{{locale_uuid}}\",\n  \"image_base64\": \"data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAMCAgMCAgMDAwMEAwMEBQgFBQQEBQoHBwYIDAoMDAsKCwsNDhIQDQ4RDgsLEBYQERMUFRUVDA8XGBYUGBIUFRT/2wBDAQMEBAUEBQkFBQkUDQsNFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBT/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k=\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/functions/v1/news",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "functions",
+                "v1",
+                "news"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "apikey",
+                "value": "{{apikey}}",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": " application/json",
+                "type": "text"
+              },
+              {
+                "key": "Accept",
+                "value": " application/json",
+                "type": "text"
+              },
+              {
+                "key": "x-client-type",
+                "value": " api",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Updated: Technology Breakthrough Gets Industry Recognition\",\n  \"keywords\": \"technology, innovation, breakthrough, science, award\",\n  \"body\": \"Updated content: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. This breakthrough has now received industry recognition and is being implemented by major companies worldwide.\",\n  \"likes\": 25,\n  \"read_count\": 150\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/functions/v1/news/{{news_uuid}}",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "functions",
+                "v1",
+                "news",
+                "{{news_uuid}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update with Base64 Image",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "apikey",
+                "value": "{{apikey}}",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": " application/json",
+                "type": "text"
+              },
+              {
+                "key": "Accept",
+                "value": " application/json",
+                "type": "text"
+              },
+              {
+                "key": "x-client-type",
+                "value": " api",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Updated with New Image: Revolutionary Discovery\",\n  \"keywords\": \"discovery, science, breakthrough, innovation\",\n  \"body\": \"This news article has been updated with a new featured image!\",\n  \"likes\": 50,\n  \"read_count\": 300,\n  \"image_base64\": \"data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAMCAgMCAgMDAwMEAwMEBQgFBQQEBQoHBwYIDAoMDAsKCwsNDhIQDQ4RDgsLEBYQERMUFRUVDA8XGBYUGBIUFRT/2wBDAQMEBAUEBQkFBQkUDQsNFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBT/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k=\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/functions/v1/news/{{news_uuid}}",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "functions",
+                "v1",
+                "news",
+                "{{news_uuid}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "apikey",
+                "value": "{{apikey}}",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "x-client-type",
+                "value": "api",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/functions/v1/news/{{news_uuid}}",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "functions",
+                "v1",
+                "news",
+                "{{news_uuid}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get function status",
+          "request": {
+            "method": "OPTIONS",
+            "header": [
+              {
+                "key": "apikey",
+                "value": "{{apikey}}",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": " application/json",
+                "type": "text"
+              },
+              {
+                "key": "Accept",
+                "value": " application/json",
+                "type": "text"
+              },
+              {
+                "key": "x-client-type",
+                "value": " api",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{url}}/functions/v1/news",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "functions",
+                "v1",
+                "news"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Method not allowed",
+          "request": {
+            "method": "HEAD",
+            "header": [
+              {
+                "key": "apikey",
+                "value": "{{apikey}}",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "x-client-type",
+                "value": "api",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{url}}/functions/v1/news",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "functions",
+                "v1",
+                "news"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "news_uuid",
+      "value": ""
+    }
+  ]
+} 

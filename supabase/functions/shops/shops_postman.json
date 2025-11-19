@@ -1,0 +1,1305 @@
+{
+  "info": {
+    "_postman_id": "shops-collection-uuid",
+    "name": "Shops",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "API",
+      "item": [
+        {
+          "name": "Get All",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "apikey",
+                "value": "{{apikey}}",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "x-client-type",
+                "value": "api",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/functions/v1/shops",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "functions",
+                "v1",
+                "shops"
+              ]
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.environment.set(\"shop_uuid\", pm.response.json().data[0].id);"
+                ],
+                "type": "text/javascript",
+                "packages": {}
+              }
+            }
+          ]
+        },
+        {
+          "name": "Get by Partner ID - Not Found (Error Test)",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "apikey",
+                "value": "{{apikey}}",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "x-client-type",
+                "value": "api",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/functions/v1/shops?partner_id=00000000-0000-0000-0000-000000000000",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "functions",
+                "v1",
+                "shops"
+              ],
+              "query": [
+                {
+                  "key": "partner_id",
+                  "value": "00000000-0000-0000-0000-000000000000",
+                  "description": "Non-existent partner UUID to test 404 error"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get by Partner ID",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "apikey",
+                "value": "{{apikey}}",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "x-client-type",
+                "value": "api",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/functions/v1/shops?partner_id={{partner_uuid}}",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "functions",
+                "v1",
+                "shops"
+              ],
+              "query": [
+                {
+                  "key": "partner_id",
+                  "value": "{{partner_uuid}}"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get with Pagination",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "apikey",
+                "value": "{{apikey}}",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "x-client-type",
+                "value": "api",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/functions/v1/shops?limit=10&page=1",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "functions",
+                "v1",
+                "shops"
+              ],
+              "query": [
+                {
+                  "key": "limit",
+                  "value": "10"
+                },
+                {
+                  "key": "page",
+                  "value": "1"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get with Search - Not Found (Error Test)",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "apikey",
+                "value": "{{apikey}}",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "x-client-type",
+                "value": "api",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/functions/v1/shops?search=nonexistentcompany12345",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "functions",
+                "v1",
+                "shops"
+              ],
+              "query": [
+                {
+                  "key": "search",
+                  "value": "nonexistentcompany12345",
+                  "description": "Search term that should return no results to test 404 error"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get with Search",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "apikey",
+                "value": "{{apikey}}",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "x-client-type",
+                "value": "api",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/functions/v1/shops?search=acme",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "functions",
+                "v1",
+                "shops"
+              ],
+              "query": [
+                {
+                  "key": "search",
+                  "value": "acme"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get with Combined Filters",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "apikey",
+                "value": "{{apikey}}",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "x-client-type",
+                "value": "api",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/functions/v1/shops?partner_id={{partner_uuid}}&search=store&limit=5&page=1",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "functions",
+                "v1",
+                "shops"
+              ],
+              "query": [
+                {
+                  "key": "partner_id",
+                  "value": "{{partner_uuid}}"
+                },
+                {
+                  "key": "search",
+                  "value": "store"
+                },
+                {
+                  "key": "limit",
+                  "value": "5"
+                },
+                {
+                  "key": "page",
+                  "value": "1"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get with Active Partners Only",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "apikey",
+                "value": "{{apikey}}",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "x-client-type",
+                "value": "api",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/functions/v1/shops?active_partners_only=true&limit=10",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "functions",
+                "v1",
+                "shops"
+              ],
+              "query": [
+                {
+                  "key": "active_partners_only",
+                  "value": "true",
+                  "description": "Filter to only show shops with active partners"
+                },
+                {
+                  "key": "limit",
+                  "value": "10"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get with Offset Pagination",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "apikey",
+                "value": "{{apikey}}",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "x-client-type",
+                "value": "api",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/functions/v1/shops?limit=15&offset=30",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "functions",
+                "v1",
+                "shops"
+              ],
+              "query": [
+                {
+                  "key": "limit",
+                  "value": "15"
+                },
+                {
+                  "key": "offset",
+                  "value": "30"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get by ID",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "apikey",
+                "value": "{{apikey}}",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": " application/json",
+                "type": "text"
+              },
+              {
+                "key": "Accept",
+                "value": " application/json",
+                "type": "text"
+              },
+              {
+                "key": "x-client-type",
+                "value": " api",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{url}}/functions/v1/shops/{{shop_uuid}}",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "functions",
+                "v1",
+                "shops",
+                "{{shop_uuid}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "apikey",
+                "value": "{{apikey}}",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "x-client-type",
+                "value": "api",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"partner_id\": \"{{partner_uuid}}\",\n  \"woo_shop_id\": 123,\n  \"active\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/functions/v1/shops",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "functions",
+                "v1",
+                "shops"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create - Missing Required Fields Error",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "apikey",
+                "value": "{{apikey}}",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "x-client-type",
+                "value": "api",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"partner_id\": \"{{partner_uuid}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/functions/v1/shops",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "functions",
+                "v1",
+                "shops"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create - WooCommerce Validation Error",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "apikey",
+                "value": "{{apikey}}",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "x-client-type",
+                "value": "api",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"partner_id\": \"{{partner_uuid}}\",\n  \"woo_shop_id\": 99999\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/functions/v1/shops",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "functions",
+                "v1",
+                "shops"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create - Minimal (Only Required Fields)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "apikey",
+                "value": "{{apikey}}",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "x-client-type",
+                "value": "api",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"partner_id\": \"{{partner_uuid}}\",\n  \"woo_shop_id\": 151\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/functions/v1/shops",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "functions",
+                "v1",
+                "shops"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create - Missing Partner ID Error",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "apikey",
+                "value": "{{apikey}}",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "x-client-type",
+                "value": "api",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"woo_shop_id\": 123\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/functions/v1/shops",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "functions",
+                "v1",
+                "shops"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create - Invalid Data Types Error",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "apikey",
+                "value": "{{apikey}}",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "x-client-type",
+                "value": "api",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"partner_id\": 123,\n  \"woo_shop_id\": \"invalid\",\n  \"active\": \"not_boolean\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/functions/v1/shops",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "functions",
+                "v1",
+                "shops"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "apikey",
+                "value": "{{apikey}}",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": " application/json",
+                "type": "text"
+              },
+              {
+                "key": "Accept",
+                "value": " application/json",
+                "type": "text"
+              },
+              {
+                "key": "x-client-type",
+                "value": " api",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"woo_shop_id\": 456,\n  \"active\": false\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/functions/v1/shops/{{shop_uuid}}",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "functions",
+                "v1",
+                "shops",
+                "{{shop_uuid}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update - Change Partner",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "apikey",
+                "value": "{{apikey}}",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": " application/json",
+                "type": "text"
+              },
+              {
+                "key": "Accept",
+                "value": " application/json",
+                "type": "text"
+              },
+              {
+                "key": "x-client-type",
+                "value": " api",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"partner_id\": \"{{partner_uuid_2}}\",\n  \"active\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/functions/v1/shops/{{shop_uuid}}",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "functions",
+                "v1",
+                "shops",
+                "{{shop_uuid}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update - Partial (Single Field)",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "apikey",
+                "value": "{{apikey}}",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": " application/json",
+                "type": "text"
+              },
+              {
+                "key": "Accept",
+                "value": " application/json",
+                "type": "text"
+              },
+              {
+                "key": "x-client-type",
+                "value": " api",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"active\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/functions/v1/shops/{{shop_uuid}}",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "functions",
+                "v1",
+                "shops",
+                "{{shop_uuid}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "apikey",
+                "value": "{{apikey}}",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "x-client-type",
+                "value": "api",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/functions/v1/shops/{{shop_uuid}}",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "functions",
+                "v1",
+                "shops",
+                "{{shop_uuid}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get function status",
+          "request": {
+            "method": "OPTIONS",
+            "header": [
+              {
+                "key": "apikey",
+                "value": "{{apikey}}",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": " application/json",
+                "type": "text"
+              },
+              {
+                "key": "Accept",
+                "value": " application/json",
+                "type": "text"
+              },
+              {
+                "key": "x-client-type",
+                "value": " api",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{url}}/functions/v1/shops",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "functions",
+                "v1",
+                "shops"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Method not allowed",
+          "request": {
+            "method": "HEAD",
+            "header": [
+              {
+                "key": "apikey",
+                "value": "{{apikey}}",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "x-client-type",
+                "value": "api",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{url}}/functions/v1/shops",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "functions",
+                "v1",
+                "shops"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "shop_uuid",
+      "value": ""
+    },
+    {
+      "key": "partner_uuid_2",
+      "value": "",
+      "description": "Secondary partner UUID for testing partner changes"
+    }
+  ]
+}

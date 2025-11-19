@@ -1,0 +1,8 @@
+supabase/functions/service_account.json
+supabase/.branches
+supabase/.temp
+supabase/node_modules
+supabase/functions/venues/controllers/venues_import.json
+.vscode
+.idea
+.env

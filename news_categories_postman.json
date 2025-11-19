@@ -1,0 +1,548 @@
+{
+	"info": {
+		"_postman_id": "aad62048-16de-4fac-ad77-0a773b59cda7",
+		"name": "Mommy HAI",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27238487",
+		"_collection_link": "https://wsd-dev.postman.co/workspace/FlutterDev.io~cabac013-b4ed-4870-a075-60a7133ede7d/collection/27238487-aad62048-16de-4fac-ad77-0a773b59cda7?action=share&source=collection_link&creator=27238487"
+	},
+	"item": [
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "LOGIN",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.collectionVariables.set(\"terminal.token\", \"eyJhbGciOiJIUzI1NiIsImtpZCI6IjEyaEdTRW9QNkdlbHVxS1ciLCJ0eXAiOiJKV1QifQ.eyJhdWQiOiJhdXRoZW50aWNhdGVkIiwiZXhwIjoxNzEwMDU0NDkwLCJpYXQiOjE3MTAwNTA4OTAsImlzcyI6Imh0dHBzOi8vanR4ZWFheG94emdsd3J0aHJkaWwuc3VwYWJhc2UuY28vYXV0aC92MSIsInN1YiI6IjkyYzA2M2E1LTQ0NDMtNGRmOS1hY2RmLTljMzFjOTZjNGE5NSIsImVtYWlsIjoiaXAwMDAwMDFAcG9zLmlwc3lzLmlvIiwicGhvbmUiOiIiLCJhcHBfbWV0YWRhdGEiOnsicHJvdmlkZXIiOiJlbWFpbCIsInByb3ZpZGVycyI6WyJlbWFpbCJdfSwidXNlcl9tZXRhZGF0YSI6e30sInJvbGUiOiJhdXRoZW50aWNhdGVkIiwiYWFsIjoiYWFsMSIsImFtciI6W3sibWV0aG9kIjoicGFzc3dvcmQiLCJ0aW1lc3RhbXAiOjE3MTAwNTA4OTB9XSwic2Vzc2lvbl9pZCI6IjU0MGI4OTQ2LWRjNmItNGNlYS1iMWI0LTU4ODU3ZmQ2NTljMyJ9.LXgYHqiZA7mnOLUIrepsIEhggK9XI0wO0qU6Dx0e8fo\");"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.environment.set(\"token\", pm.response.json().access_token);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "apikey",
+								"value": "{{apikey}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \"email\": \"{{user}}\", \"password\": \"{{pass}}\"}"
+						},
+						"url": {
+							"raw": "{{url}}/auth/v1/token?grant_type=password",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"auth",
+								"v1",
+								"token"
+							],
+							"query": [
+								{
+									"key": "grant_type",
+									"value": "password"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Refresh token",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "apikey",
+								"value": "{{apikey}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \"email\": \"{{user}}\", \"password\": \"{{pass}}\"}"
+						},
+						"url": {
+							"raw": "{{url}}/auth/v1/token?grant_type=password",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"auth",
+								"v1",
+								"token"
+							],
+							"query": [
+								{
+									"key": "grant_type",
+									"value": "password"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Check permission",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "apikey",
+								"value": "{{apikey}}"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{terminal.token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \"action_required\": \"r\", \"table_name\": \"menus\" }"
+						},
+						"url": {
+							"raw": "{{url}}/rest/v1/rpc/check_user_permission_with_claims",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"rest",
+								"v1",
+								"rpc",
+								"check_user_permission_with_claims"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "News Categories",
+			"item": [
+				{
+					"name": "API",
+					"item": [
+						{
+							"name": "Get All",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.environment.set(\"news_category_uuid\", pm.response.json().data[0].id);"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "apikey",
+										"value": "{{apikey}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "x-client-type",
+										"value": "api",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/functions/v1/news_categories",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"functions",
+										"v1",
+										"news_categories"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get by ID",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "apikey",
+										"value": "{{apikey}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": " application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": " application/json",
+										"type": "text"
+									},
+									{
+										"key": "x-client-type",
+										"value": " api",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/functions/v1/news_categories/{{news_category_uuid}}",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"functions",
+										"v1",
+										"news_categories",
+										"{{news_category_uuid}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "apikey",
+										"value": "{{apikey}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": " application/json",
+										"type": "text"
+									},
+									{
+										"key": "x-client-type",
+										"value": " api",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"name\": \"Technology\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/functions/v1/news_categories",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"functions",
+										"v1",
+										"news_categories"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "apikey",
+										"value": "{{apikey}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": " application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": " application/json",
+										"type": "text"
+									},
+									{
+										"key": "x-client-type",
+										"value": " api",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"name\": \"Tech & Innovation\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/functions/v1/news_categories/{{news_category_uuid}}",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"functions",
+										"v1",
+										"news_categories",
+										"{{news_category_uuid}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "apikey",
+										"value": "{{apikey}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": " application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": " application/json",
+										"type": "text"
+									},
+									{
+										"key": "x-client-type",
+										"value": " api",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/functions/v1/news_categories/{{news_category_uuid}}",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"functions",
+										"v1",
+										"news_categories",
+										"{{news_category_uuid}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get function status",
+							"request": {
+								"method": "OPTIONS",
+								"header": [
+									{
+										"key": "apikey",
+										"value": "{{apikey}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": " application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": " application/json",
+										"type": "text"
+									},
+									{
+										"key": "x-client-type",
+										"value": " api",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/functions/v1/news_categories",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"functions",
+										"v1",
+										"news_categories"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Method not allowed",
+							"request": {
+								"method": "HEAD",
+								"header": [
+									{
+										"key": "apikey",
+										"value": "{{apikey}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": " application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": " application/json",
+										"type": "text"
+									},
+									{
+										"key": "x-client-type",
+										"value": " api",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/functions/v1/news_categories",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"functions",
+										"v1",
+										"news_categories"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "terminal.token",
+			"value": ""
+		}
+	]
+}
